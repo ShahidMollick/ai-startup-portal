@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import SideMenu from './components/sideMenu';
 import Button from './components/button';
@@ -18,19 +18,22 @@ function App() {
         <div className="formBox">
           <div className="formBody">
             <div className="leftInput">
-              <Switch>
-                <Route path="/ideation" component={Ideation} />
-                <Route path="/product" component={Product} />
-                <Route path="/marketing" component={Marketing} />
-                <Route path="/finance" component={Finance} />
-                <Route path="/logistics" component={Logistics} />
-                <Route path="/launch" component={Launch} />
-                <Route path="/bplan" component={Bplan} />
-                <Redirect from="/" to="/ideation" />
-              </Switch>
+              <Routes>
+                <Route path="/ideation" element={<Ideation />} />
+                <Route path="/product" element={<Product />} />
+                <Route path="/marketing" element={<Marketing />} />
+                <Route path="/finance" element={<Finance />} />
+                <Route path="/logistics" element={<Logistics />} />
+                <Route path="/launch" element={<Launch />} />
+                <Route path="/bplan" element={<Bplan />} />
+                <Route path="/" element={<Navigate to="/ideation" />} />
+              </Routes>
             </div>
             <div className="rightInput">
               Have some other things in your mind? Let us know!
+              <div className="inputBox">
+                {/* Additional Inputs or Elements */}
+              </div>
             </div>
           </div>
           <div className="formFooter">

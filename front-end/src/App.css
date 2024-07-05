@@ -1,6 +1,7 @@
 .app{
     display: flex;
     flex-direction: row;
+    gap: 24px;
 }
 .formBox{
     background-color: white;
