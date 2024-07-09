@@ -1,0 +1,36 @@
+.custom-button {
+    display: flex;
+    width: 110px;
+    height: 24.444px;
+    padding: 8.148px 8.148px 8.148px 11.407px;
+    align-items: center;
+    gap: 8.148px;
+    flex-shrink: 0;
+    border-radius: 26.074px;
+    background: #4A45FF;
+    border: none; /* Remove default border */
+    cursor: pointer; /* Add cursor pointer on hover */
+    justify-content: space-between;
+  }
+  
+  .small-text {
+    color: #FFF;
+    font-family: Inter, sans-serif;
+    font-size: 11.407px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+
+  }
+  
+  .large-text {
+    color: #FFF;
+    font-family: Inter, sans-serif;
+    font-size: 19.556px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 5px;
+  }
+  

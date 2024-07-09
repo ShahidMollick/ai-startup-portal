@@ -1,0 +1,87 @@
+.sideMenu {
+    min-width: 220px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    width: 15%;
+    height: 90vh;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+}
+.logo h2 {
+    color: var(--primary-accent-color);
+    margin-bottom: 30px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    color: #444;
+}
+
+.menuItem.active {
+    background-color: #e0e7ff;
+    color: var(--primary-accent-color);
+    border-radius: 10px;
+}
+
+.menuItem i {
+    margin-right: 10px;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    border-top: #bbbbbb solid 0.5px ;
+    align-items: center;
+    padding-top: 24px;
+}
+
+.profile img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.profileInfo span {
+    display: block;
+    color: #666;
+}
+
+/* Icon classes */
+.homeIcon::before {
+    content: url(path/to/home-icon.svg); /* Update the path to your icons */
+}
+
+.productIcon::before {
+    content: url(path/to/product-icon.svg);
+}
+
+.marketingIcon::before {
+    content: url(path/to/marketing-icon.svg);
+}
+
+.financeIcon::before {
+    content: url(path/to/finance-icon.svg);
+}
+
+.logisticsIcon::before {
+    content: url(path/to/logistics-icon.svg);
+}
+
+.launchIcon::before {
+    content: url(path/to/launch-icon.svg);
+}
+
+.businessPlanIcon::before {
+    content: url(path/to/business-plan-icon.svg);
+}

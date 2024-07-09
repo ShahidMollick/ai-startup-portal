@@ -1,0 +1,32 @@
+.app{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+.formBox{
+    background-color: white;
+    width: 100%;
+    margin-top: 32px;
+    margin-right: 32px;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between ;
+    padding: 32px;
+}
+.formBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 108px;
+}
+.leftInput{
+    width: 100%;
+}
+.rightInput{
+    width: 100%;
+}
+.formFooter{
+    display: flex;
+    justify-content: space-between;
+}

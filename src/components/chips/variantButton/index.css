@@ -1,0 +1,29 @@
+
+ .variant-button {
+  display: flex;
+  align-items: center;
+  width: 421px;
+  height: 35px;
+  flex-shrink: 0;
+  border: 0.5px solid #4A45FF;
+  border-radius: 32px;
+  background: var(--black-amp-white-white, #FFF);
+  cursor: pointer;
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  color: #4A45FF;
+  text-align: center; /* Center align text */
+  justify-content: center; /* Center align text horizontally */
+  margin-left: 45px;
+  margin-top: 40px;
+}
+
+.variant-button span {
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px; /* Add some padding for better text alignment */
+}
