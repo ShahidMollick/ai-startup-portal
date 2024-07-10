@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import Select from 'react-select';
 import Flag from 'react-world-flags';
-import defaultSearchIcon from '../../assets/icons/search.png'; // Default search icon
-
+import defaultSearchIcon from '../../assets/icons/search.png'; 
 const sizes = {
   small: '12px',
   default: '16px',

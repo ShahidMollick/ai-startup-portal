@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import '../ideation/index.css';
 import SkillsInput from '../../components/skillInput/index';
-import InputField from '../../components/inputField'; // Import the new InputField component
+import InputField from '../../components/inputField'; 
 import VariantButton from '../../components/chips/variantButton';
+import Button from '../../components/button';
 
 const Ideation = () => {
   const [skills, setSkills] = useState([]);
   const [interests, setInterests] = useState([]);
-  const [country, setCountry] = useState("IND"); // Set default country to IND
+  const [country, setCountry] = useState("IND"); 
 
   return (
     <div className="ideation-page">
@@ -34,7 +35,11 @@ const Ideation = () => {
             placeholder="Enter your location here..."
           />
         </div>
-        <VariantButton text="Add more information section" />
+        <Button variant='outline'width='100%' >Add more information
+        </Button>
+        <Button variant='primary'width='100%' >Add more information
+        </Button>
+          
       </div>
     </div>
   );

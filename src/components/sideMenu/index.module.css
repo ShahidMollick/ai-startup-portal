@@ -57,9 +57,9 @@
     color: #666;
 }
 
-/* Icon classes */
+
 .homeIcon::before {
-    content: url(path/to/home-icon.svg); /* Update the path to your icons */
+    content: url(path/to/home-icon.svg); 
 }
 
 .productIcon::before {

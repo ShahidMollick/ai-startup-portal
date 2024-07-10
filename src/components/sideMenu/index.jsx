@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import styles from './index.module.css'; // Importing the CSS module
+import styles from './index.module.css'; 
 import profile from '../../assets/avatars/charles-bodwell-profile.png';
 import Button from '../button';
 
-// Import all icons
+
 import ideationIconPurple from '../../assets/icons/filled/purple/ideation.png';
 import productIconPurple from '../../assets/icons/filled/purple/product.png';
 import marketingIconPurple from '../../assets/icons/filled/purple/marketing.png';
@@ -21,7 +21,7 @@ import logisticsIconWhite from '../../assets/icons/filled/white/logistics.png';
 import launchIconWhite from '../../assets/icons/filled/white/launch.png';
 import bplanIconWhite from '../../assets/icons/filled/white/bplan.png';
 
-// Create an object to map route names to icons
+
 const icons = {
   ideation: { purple: ideationIconPurple, white: ideationIconWhite },
   product: { purple: productIconPurple, white: productIconWhite },
