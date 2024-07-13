@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react';
-import CustomTextComponent from '../../components/chips/filledChip/index';
-import CustomButton from '../../components/chips/plainChip';
-import VariantButton from '../chips/variantButton';
-import InputField from '../../components/inputField/index'; // Ensure the correct import
-import search from '../../assets/icons/search.png';
+import Button from '../button/index';
+import './index.css'
+import Chip from '../chips/index';
+import InputField from '../../components/inputField/index';
 
-const SkillsInput = ({ type, items, setItems }) => {
+const SkillsInput = ({ type, items, setItems, searchOptions }) => {
   const searchInputRef = useRef(null);
   const [location, setLocation] = useState(null);
 
@@ -22,7 +21,7 @@ const SkillsInput = ({ type, items, setItems }) => {
   };
 
   const addItem = (item) => {
-    if (item) {
+    if (item && !items.includes(item)) {
       setItems([...items, item]);
       if (searchInputRef.current) {
         searchInputRef.current.value = '';
@@ -44,6 +43,10 @@ const SkillsInput = ({ type, items, setItems }) => {
     setLocation(selectedCountry);
   };
 
+  const handleSelectOption = (option) => {
+    addItem(option.label);
+  };
+
   return (
     <div>
       <div className="search-container">
@@ -52,17 +55,33 @@ const SkillsInput = ({ type, items, setItems }) => {
           ref={searchInputRef} 
           onKeyPress={handleKeyPress}
           placeholder={`Enter your ${type.toLowerCase()} here...`}
+          searchOptions={searchOptions}
+          onSelectOption={handleSelectOption}
         />
       </div>
 
       <div className="skills-container">
-        <CustomTextComponent onFocusSearch={handleFocusSearch} type={type} />
+        <Button 
+        style={{'box-sizing':'content-box',
+        'display':'flex',
+        'height':'14px',
+        'width':'auto',
+        'gap':'4px',
+        'justify-content':'space-between',
+        'text-wrap':'nowrap'}} 
+        variant="secondary" 
+        onClick={handleFocusSearch}>
+          <span>add {type}</span><span>+</span>
+        </Button>
         {items.map((item, index) => (
-          <CustomButton
+          <Chip
             key={index}
-            text={item}
+            icon={null}  
+            variant="outline"
             onRemove={() => removeItem(index)}
-          />
+          >
+            {item}
+          </Chip>
         ))}
       </div>
 
@@ -74,8 +93,9 @@ const SkillsInput = ({ type, items, setItems }) => {
             onChange={handleCountryChange}
             value={location}
           />
-          {/* Add the new VariantButton */}
-          <VariantButton />
+          <Button variant="outline" onClick={handleAddItem}>
+            Add Location
+          </Button>
         </div>
       )}
     </div>

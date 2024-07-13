@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Select from 'react-select';
 import Flag from 'react-world-flags';
 import defaultSearchIcon from '../../assets/icons/search.png'; 
+
 const sizes = {
   small: '12px',
   default: '16px',
@@ -28,13 +29,12 @@ const variants = {
     border: 1px solid #000;
     background-color: #fff;
     color: #000;
-   
     border-radius: 32px;
     &:focus-within {
       border: 1px solid var(--primary-accent-color);
     }
     height: 35px; /* Specific height for country variant */
-    width: -85px; /* Specific width for country variant */
+    width: 122px; /* Specific width for country variant */
   `,
 };
 
@@ -71,6 +71,30 @@ const StyledInput = styled.input`
 
   &:focus::placeholder {
     color: #666; /* Placeholder color when focused */
+  }
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+`;
+
+const DropdownItem = styled.div`
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f1f1f1;
   }
 `;
 
@@ -112,11 +136,27 @@ const InputField = React.forwardRef(({
   width,
   height,
   icon,
+  searchOptions = [],
+  onSelectOption,
   ...props
 }, ref) => {
+  const [searchText, setSearchText] = useState('');
+  const [filteredOptions, setFilteredOptions] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const defaultIcon = type === 'search' ? defaultSearchIcon : 'None';
   const displayIcon = icon !== undefined ? icon : defaultIcon;
+
+  useEffect(() => {
+    if (searchText) {
+      const filtered = searchOptions.filter(option =>
+        option.label.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredOptions(filtered);
+    } else {
+      setFilteredOptions(searchOptions);
+    }
+  }, [searchText, searchOptions]);
 
   const handleCountryChange = (selectedOption) => {
     setSelectedCountry(selectedOption);
@@ -129,8 +169,23 @@ const InputField = React.forwardRef(({
     </div>
   );
 
+  const handleSelect = (option) => {
+    onSelectOption(option);
+    setSearchText('');
+    setFilteredOptions([]);
+    setDropdownOpen(false);
+  };
+
+  const handleFocus = () => {
+    setDropdownOpen(true);
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => setDropdownOpen(false), 200); 
+  };
+
   return (
-    <StyledInputContainer variant={variant} width={width} height={height} >
+    <StyledInputContainer variant={variant} width={width} height={height}>
       {variant === 'country' && selectedCountry && (
         <Flag code={selectedCountry.flag} alt="flag" />
       )}
@@ -149,7 +204,28 @@ const InputField = React.forwardRef(({
           />
         </CountrySelectContainer>
       ) : (
-        <StyledInput ref={ref} {...props} />
+        <>
+          <StyledInput
+            ref={ref}
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            {...props}
+          />
+          <Dropdown isOpen={dropdownOpen}>
+            {filteredOptions.map((option, index) => (
+              <DropdownItem key={index} onClick={() => handleSelect(option)}>
+                {option.label}
+              </DropdownItem>
+            ))}
+            {searchText && !filteredOptions.find(option => option.label === searchText) && (
+              <DropdownItem onClick={() => handleSelect({ label: searchText, value: searchText })}>
+                {searchText}
+              </DropdownItem>
+            )}
+          </Dropdown>
+        </>
       )}
     </StyledInputContainer>
   );
@@ -162,5 +238,4 @@ const countryOptions = [
   { value: 'CA', label: 'CAN', flag: 'CA' },
   { value: 'GB', label: 'UK', flag: 'GB' },
   { value: 'IN', label: 'IND', flag: 'IN' },
-  // Add more countries as needed
 ];

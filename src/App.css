@@ -18,10 +18,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 108px;
+    gap: 48px;
 }
 .leftInput{
     width: 100%;
+    height: 75vh;
+    overflow: scroll;
+    padding-right: 48px;
 }
 .rightInput{
     width: 100%;
@@ -29,4 +32,30 @@
 .formFooter{
     display: flex;
     justify-content: space-between;
+    padding-top: 8px;
+    margin-top:8px;
+    border-top: 0.5px solid grey;
 }
+.leftInput::-webkit-scrollbar {
+    width: var(--small-size);
+  }
+  
+  .leftInput::-webkit-scrollbar-track {
+    background: var(--secondary-light);
+    border-radius: 10px;
+  }
+  
+  .leftInput::-webkit-scrollbar-thumb {
+    background: var(--primary-accent-color);
+    border-radius: 10px;
+  }
+  
+  .leftInput::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-active);
+  }
+  
+  /* For Firefox */
+  .leftInput {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-accent-color) var(--secondary-light);
+  }
