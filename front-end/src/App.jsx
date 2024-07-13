@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import SideMenu from './components/sideMenu';
@@ -9,8 +10,32 @@ import Finance from './pages/finance/index';
 import Logistics from './pages/logistics/index';
 import Launch from './pages/launch/index';
 import Bplan from './pages/bplan/index';
+import ProgressBar from './components/progressbar/index';
 
 function App() {
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setProgress((oldProgress) => {
+          const newProgress = oldProgress + 1;
+          if (newProgress === 100) {
+            clearInterval(interval);
+            setLoading(false);
+          }
+          return newProgress;
+        });
+      }, 100); // Increment progress every 100 milliseconds
+    }
+  }, [loading]);
+
+  const handleGenerateClick = () => {
+    setLoading(true);
+    setProgress(0); // Reset progress to 0 when button is clicked
+  };
+
   return (
     <Router>
       <div className="app">
@@ -38,9 +63,15 @@ function App() {
           </div>
           <div className="formFooter">
             <Button variant='ghost'>Previous</Button>
-            <Button variant='primary'>Generate</Button>
+            <Button variant='primary' onClick={handleGenerateClick}>Generate</Button>
           </div>
         </div>
+        {loading && (
+          <div className="loading-overlay">
+            <ProgressBar progress={progress} />
+            
+          </div>
+        )}
       </div>
     </Router>
   );
