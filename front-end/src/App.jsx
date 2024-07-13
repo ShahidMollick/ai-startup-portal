@@ -29,12 +29,12 @@ function App() {
                 <Route path="/" element={<Navigate to="/ideation" />} />
               </Routes>
             </div>
-            <div className="rightInput">
+            {/* <div className="rightInput">
               Have some other things in your mind? Let us know!
               <div className="inputBox">
-                {/* Additional Inputs or Elements */}
+                {/* Additional Inputs or Elements
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="formFooter">
             <Button variant='ghost'>Previous</Button>
