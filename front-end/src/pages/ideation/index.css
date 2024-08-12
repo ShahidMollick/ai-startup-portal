@@ -15,3 +15,15 @@
     height: 100vh;
     gap: 10px;
 }
+
+.row-Container-Pestel{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    height: 70vh;
+    gap: 10px;
+}
+
+.ideation-page{
+    width: 100%;
+}

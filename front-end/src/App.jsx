@@ -9,6 +9,8 @@ import Finance from './pages/finance/index';
 import Logistics from './pages/logistics/index';
 import Launch from './pages/launch/index';
 import Bplan from './pages/bplan/index';
+import PostGeneration from './pages/ideation/postGeneration';
+import SWOT from './pages/ideation/swot'
 
 function App() {
   return (
@@ -26,15 +28,12 @@ function App() {
                 <Route path="/logistics" element={<Logistics />} />
                 <Route path="/launch" element={<Launch />} />
                 <Route path="/bplan" element={<Bplan />} />
+                <Route path="/postgeneration" element={<PostGeneration/>} />
+                <Route path="/postgeneration/swot" element={<SWOT/>} />
                 <Route path="/" element={<Navigate to="/ideation" />} />
               </Routes>
             </div>
-            {/* <div className="rightInput">
-              Have some other things in your mind? Let us know!
-              <div className="inputBox">
-                {/* Additional Inputs or Elements
-              </div>
-            </div> */}
+           
           </div>
           <div className="formFooter">
             <Button variant='ghost'>Previous</Button>

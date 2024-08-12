@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 const CardWrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: auto;
   padding: 12px 24px;
   flex-direction: column;
   align-items: flex-start;
@@ -60,9 +60,9 @@ const CardFooter = styled.div`
   padding: 4px;
 `;
 
-const Card = ({ variant = 'primary', width, header, body, footer }) => {
+const Card = ({ variant = 'primary', width, header, body, footer, onClick }) => {
   return (
-    <CardWrapper variant={variant} width={width}>
+    <CardWrapper variant={variant} width={width} onClick={onClick} style={{ cursor: 'pointer' }}>
       {header && <CardHeader variant={variant}>{header}</CardHeader>}
       <CardBody>{body}</CardBody>
       {footer && <CardFooter>{footer}</CardFooter>}

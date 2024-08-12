@@ -6,7 +6,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-GROQ_API_KEY="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"
+# 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
+# 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
+
+GROQ_API_KEY = "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"
 client = Groq(api_key=GROQ_API_KEY)
 
 messages = [
@@ -40,6 +43,52 @@ def parse_ideas(response):
     
     return headlines, content_matches
 
+def parse_swot(response):
+    description_pattern = r"(?<=Description:).*?(?=Strengths:)"
+    strengths_pattern = r"(?<=Strengths:).*?(?=Weaknesses:)"
+    weaknesses_pattern = r"(?<=Weaknesses:).*?(?=Opportunities:)"
+    opportunities_pattern = r"(?<=Opportunities:).*?(?=Threats:)"
+    threats_pattern = r"(?<=Threats:).*?(?=Pestel Analysis:)"
+
+    description_match = re.search(description_pattern, response, re.DOTALL)
+    strengths_match = re.search(strengths_pattern, response, re.DOTALL)
+    weaknesses_match = re.search(weaknesses_pattern, response, re.DOTALL)
+    opportunities_match = re.search(opportunities_pattern, response, re.DOTALL)
+    threats_match = re.search(threats_pattern, response, re.DOTALL)
+
+    return {
+        "description": description_match.group(0).strip() if description_match else "",
+        "strengths": strengths_match.group(0).strip() if strengths_match else "",
+        "weaknesses": weaknesses_match.group(0).strip() if weaknesses_match else "",
+        "opportunities": opportunities_match.group(0).strip() if opportunities_match else "",
+        "threats": threats_match.group(0).strip() if threats_match else "",
+    }
+
+def parse_pestel(response):
+    political_pattern = r"(?<=Political:).*?(?=Economical:)"
+    econimical_pattern = r"(?<=Economical:).*?(?=Social:)"
+    social_pattern = r"(?<=Social:).*?(?=Technological:)"
+    technological_pattern = r"(?<=Technological:).*?(?=Environmental:)"
+    environmental_pattern = r"(?<=Environmental:).*?(?=Local:)"
+    local_pattern = r"(?<=Local:).*"
+
+    political_match = re.search(political_pattern, response, re.DOTALL)
+    econimical_match = re.search(econimical_pattern, response, re.DOTALL)
+    social_match = re.search(social_pattern, response, re.DOTALL)
+    technological_match = re.search(technological_pattern, response, re.DOTALL)
+    environmental_match = re.search(environmental_pattern, response, re.DOTALL)
+    local_match = re.search(local_pattern, response, re.DOTALL)
+
+    return {
+        "Political": political_match.group(0).strip() if political_match else "",
+        "Economical": econimical_match.group(0).strip() if econimical_match else "",
+        "Social": social_match.group(0).strip() if social_match else "",
+        "Technological": technological_match.group(0).strip() if technological_match else "",
+        "Environmental": environmental_match.group(0).strip() if environmental_match else "",
+        "Local": local_match.group(0).strip() if local_match else "",
+    }
+
+
 @app.route('/generate-ideas', methods=['POST'])
 def generate_ideas():
     data = request.json
@@ -72,6 +121,82 @@ def generate_ideas():
     return jsonify({
         "headlines": global_headlines,
         "content": global_content
+    })
+
+
+@app.route('/generate-swot', methods=['POST'])
+def generate_swot():
+    data = request.json
+    headline = data.get("headline")
+    content = data.get("content")
+
+    prompt = f"""
+    Analyze the following business idea:
+    {headline}
+    {content}
+    
+    Provide a detailed description and SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) of the idea. Must ensure that the Strengths, Weaknesses, Opportunities, Threats must contain less than 30 words. Description must contain more than 80 words.
+
+    Format the response as follows:
+    Description:
+    <Your description here>
+
+    Strengths:
+    <Your strengths here>
+
+    Weaknesses:
+    <Your weaknesses here>
+
+    Opportunities:
+    <Your opportunities here>
+
+    Threats:
+    <Your threats here>
+    
+    Provide a detailed description and Pestel analysis (Political, Economical, Social, Technological, Environmental, Local) of the idea. Each point except description contains not more than 20 words.
+
+    Format the response as follows:
+    Political:
+    <Your description here>
+
+    Economical:
+    <Your strengths here>
+
+    Social:
+    <Your weaknesses here>
+
+    Technological:
+    <Your opportunities here>
+
+    Environmental:
+    <Your threats here>
+    
+    Local:
+    <Your threats here>
+    
+    """
+
+    messages.append({"role": "user", "content": prompt})
+    response = generate_chat_response(messages)
+    swot_analysis = parse_swot(response)
+    pestel_analysis = parse_pestel(response)
+    
+    return jsonify({
+        "description": swot_analysis['description'],
+        "swot": {
+            "strengths": swot_analysis['strengths'],
+            "weaknesses": swot_analysis['weaknesses'],
+            "opportunities": swot_analysis['opportunities'],
+            "threats": swot_analysis['threats']
+        },
+        "pestel":{
+            "Political": pestel_analysis['Political'],
+            "Economical": pestel_analysis['Economical'],
+            "Social": pestel_analysis['Social'],
+            "Technological": pestel_analysis['Technological'],
+            "Environmental": pestel_analysis['Environmental'],
+            "Local": pestel_analysis['Local'],
+        }
     })
 
 if __name__ == '__main__':
