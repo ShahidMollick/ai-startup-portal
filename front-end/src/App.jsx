@@ -11,6 +11,7 @@ import Launch from './pages/launch/index';
 import Bplan from './pages/bplan/index';
 import PostGeneration from './pages/ideation/postGeneration';
 import SWOT from './pages/ideation/swot'
+import Target from './pages/product/target'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                 <Route path="/bplan" element={<Bplan />} />
                 <Route path="/postgeneration" element={<PostGeneration/>} />
                 <Route path="/postgeneration/swot" element={<SWOT/>} />
+                <Route path="/target" element={<Target/>}/>
                 <Route path="/" element={<Navigate to="/ideation" />} />
               </Routes>
             </div>

@@ -1,0 +1,28 @@
+[
+    { "value": "Technology", "label": "Technology" },
+    { "value": "Programming", "label": "Programming" },
+    { "value": "AI", "label": "AI" },
+    { "value": "Data Science", "label": "Data Science" },
+    { "value": "Web Development", "label": "Web Development" },
+    { "value": "Mobile Development", "label": "Mobile Development" },
+    { "value": "Gaming", "label": "Gaming" },
+    { "value": "Cybersecurity", "label": "Cybersecurity" },
+    { "value": "DevOps", "label": "DevOps" },
+    { "value": "Cloud Computing", "label": "Cloud Computing" },
+    { "value": "Networking", "label": "Networking" },
+    { "value": "Blockchain", "label": "Blockchain" },
+    { "value": "IoT", "label": "IoT" },
+    { "value": "Quantum Computing", "label": "Quantum Computing" },
+    { "value": "Augmented Reality", "label": "Augmented Reality" },
+    { "value": "Virtual Reality", "label": "Virtual Reality" },
+    { "value": "Software Engineering", "label": "Software Engineering" },
+    { "value": "Startups", "label": "Startups" },
+    { "value": "Entrepreneurship", "label": "Entrepreneurship" },
+    { "value": "Product Management", "label": "Product Management" },
+    { "value": "Design Thinking", "label": "Design Thinking" },
+    { "value": "Digital Marketing", "label": "Digital Marketing" },
+    { "value": "Content Creation", "label": "Content Creation" },
+    { "value": "Social Media", "label": "Social Media" },
+    { "value": "E-commerce", "label": "E-commerce" }
+  ]
+  
