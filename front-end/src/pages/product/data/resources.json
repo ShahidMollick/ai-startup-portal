@@ -1,0 +1,14 @@
+{
+      "financial": [
+        { "value": "funding available", "label": "funding available" }
+      ],
+      "tools": [
+        { "value": "High-tech computer", "label": "High-tech computer" },
+        { "value": "Blockchain", "label": "Blockchain" }
+      ],
+      "facilities": [
+        { "value": "Co-working space", "label": "Co-working space" },
+        { "value": "Research lab access", "label": "Research lab access" }
+      ]
+    }
+  
