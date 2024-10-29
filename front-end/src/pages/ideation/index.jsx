@@ -36,7 +36,7 @@ const Ideation = () => {
 
   const handleGenerateIdeas = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/generate-ideas', {
+      const response = await axios.post('https://startup-portal-gobw.onrender.com/generate-ideas/generate-ideas', {
         location: country,
         detailed_location: location, 
         skills: skills,
